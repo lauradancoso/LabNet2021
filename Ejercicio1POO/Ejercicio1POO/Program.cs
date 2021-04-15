@@ -11,20 +11,16 @@ namespace Ejercicio1POO
     {
         static void Main(string[] args)
         {
-            List<Transporte> transportes = new List<Transporte> 
-            {
-                new Avion(100),
-                new Avion(30),
-                new Avion(10),
-                new Avion(5),
-                new Avion(200),
-                new Automovil(4),
-                new Automovil(3),
-                new Automovil(5),
-                new Automovil(2),
-                new Automovil(3)
-            };
+            List<Transporte> transportes = new List<Transporte>();
 
+            Random random = new Random();
+
+            for (int i = 0; i < 5; i++)
+            {
+                transportes.Add(new Automovil(random.Next(1, 4)));
+                transportes.Add(new Avion(random.Next(10, 200)));
+            }
+            
             Console.WriteLine("Mostrando información sobre los transportes:");
             foreach (var transporte in transportes)
             {

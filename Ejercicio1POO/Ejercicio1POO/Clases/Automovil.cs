@@ -21,7 +21,7 @@ namespace Ejercicio1POO.Clases
         }
         public override string MostrarInfo()
         {
-            return $"El automovil tiene {this.getPasajeros()} pasajero/s";
+            return $"El automovil tiene {this.Pasajeros} pasajero/s";
         }
     }
 }

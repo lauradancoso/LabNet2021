@@ -10,6 +10,8 @@ namespace Ejercicio1POO.Clases
     {
         private int pasajeros;
 
+        public int Pasajeros { get => pasajeros; }
+
         protected Transporte(int pasajeros)
         {
             this.pasajeros = pasajeros;
@@ -18,10 +20,6 @@ namespace Ejercicio1POO.Clases
         public abstract string Avanzar();
         public abstract string Detenerse();
         public abstract string MostrarInfo();
-        public int getPasajeros()
-        {
-            return pasajeros;
-        }
 
     }
 }

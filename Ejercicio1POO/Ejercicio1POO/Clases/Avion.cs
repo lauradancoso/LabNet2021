@@ -22,7 +22,7 @@ namespace Ejercicio1POO.Clases
 
         public override string MostrarInfo()
         {
-            return $"El avión tiene {this.getPasajeros()} pasajero/s";
+            return $"El avión tiene {this.Pasajeros} pasajero/s";
         }
     }
 }
