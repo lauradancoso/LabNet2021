@@ -111,7 +111,7 @@ namespace Ejercicio2
         {
             try
             {
-                Logic.ThrowCustomException();
+                Logic.ThrowCustomException("1234");
             }
             catch (CustomException ex)
             {
