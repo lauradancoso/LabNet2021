@@ -17,8 +17,6 @@ namespace Ejercicio1POO.Clases
             this.pasajeros = pasajeros;
         }
 
-        public abstract string Avanzar();
-        public abstract string Detenerse();
         public abstract string MostrarInfo();
 
     }
