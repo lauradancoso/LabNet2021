@@ -29,6 +29,7 @@ namespace Practica.EF.Presentation
                     employeesUI.Menu();
                     break;
                 default:
+                    Console.WriteLine("Error, corra el programa de nuevo para volver a empezar");
                     break;
             }
             Console.ReadLine();

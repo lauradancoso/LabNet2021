@@ -43,10 +43,8 @@ namespace Practica.EF.Logic
                 var categorieToUpdate = context.Categories.Find(updatedT.CategoryID);
                 
                 categorieToUpdate.CategoryName = updatedT.CategoryName;
-                if (updatedT.Description != null)
-                    categorieToUpdate.Description = updatedT.Description;
-                if (updatedT.Picture != null)
-                    categorieToUpdate.Picture = updatedT.Picture;
+                categorieToUpdate.Description = updatedT.Description;
+                categorieToUpdate.Picture = updatedT.Picture;
 
                 context.SaveChanges();
             }

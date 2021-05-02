@@ -44,14 +44,11 @@ namespace Practica.EF.Logic
 
                 employeeToUpdate.FirstName = updatedT.FirstName;
                 employeeToUpdate.LastName = updatedT.LastName;
-                if (updatedT.Title != null)
-                    employeeToUpdate.Title = updatedT.Title;
-                if (updatedT.TitleOfCourtesy != null)
-                    employeeToUpdate.TitleOfCourtesy = updatedT.TitleOfCourtesy;
-                if (updatedT.BirthDate != null)
-                    employeeToUpdate.BirthDate = updatedT.BirthDate;
-                if (updatedT.HireDate != null)
-                    employeeToUpdate.HireDate = updatedT.HireDate;
+
+                employeeToUpdate.Title = updatedT.Title;
+                employeeToUpdate.TitleOfCourtesy = updatedT.TitleOfCourtesy;
+                employeeToUpdate.BirthDate = updatedT.BirthDate;
+                employeeToUpdate.HireDate = updatedT.HireDate;
                 ///TODO seguir!
 
                 context.SaveChanges();
