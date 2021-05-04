@@ -7,7 +7,7 @@ using Practica.EF.Entities;
 
 namespace Practica.EF.Logic
 {
-    public class EmployeesContext : BaseLogic, IABM<Employees>
+    public class EmployeesLogic : BaseLogic, IABM<Employees>
     {
         public void Add(Employees newT)
         {
@@ -17,18 +17,11 @@ namespace Practica.EF.Logic
 
         public void Delete(int id)
         {
-            try
-            {
+           
                 var employeeToDelete = context.Employees.Find(id);
                 context.Employees.Remove(employeeToDelete);
                 context.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
+            
         }
 
         public List<Employees> GetAll()
@@ -38,8 +31,7 @@ namespace Practica.EF.Logic
 
         public void Update(Employees updatedT)
         {
-            try
-            {
+            
                 var employeeToUpdate = context.Employees.Find(updatedT.EmployeeID);
 
                 employeeToUpdate.FirstName = updatedT.FirstName;
@@ -52,12 +44,7 @@ namespace Practica.EF.Logic
                 ///TODO seguir!
 
                 context.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            
         }
     }
 }

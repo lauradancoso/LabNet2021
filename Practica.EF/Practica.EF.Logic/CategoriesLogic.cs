@@ -7,7 +7,7 @@ using Practica.EF.Entities;
 
 namespace Practica.EF.Logic
 {
-    public class CategoriesContext : BaseLogic, IABM<Categories>
+    public class CategoriesLogic : BaseLogic, IABM<Categories>
     {
         public void Add(Categories newT)
         {
@@ -17,18 +17,11 @@ namespace Practica.EF.Logic
 
         public void Delete(int id)
         {
-            try
-            {
+            
                 var categorieToDelete = context.Categories.Find(id);
                 context.Categories.Remove(categorieToDelete);
                 context.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-           
+            
         }
 
         public List<Categories> GetAll()
@@ -38,8 +31,6 @@ namespace Practica.EF.Logic
 
         public void Update(Categories updatedT)
         {
-            try
-            {
                 var categorieToUpdate = context.Categories.Find(updatedT.CategoryID);
                 
                 categorieToUpdate.CategoryName = updatedT.CategoryName;
@@ -47,12 +38,7 @@ namespace Practica.EF.Logic
                 categorieToUpdate.Picture = updatedT.Picture;
 
                 context.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+          
         }  
     }
 }

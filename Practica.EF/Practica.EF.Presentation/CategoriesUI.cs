@@ -8,22 +8,24 @@ using Practica.EF.Entities;
 
 namespace Practica.EF.Presentation
 {
-    public class CategoriesUI
+    public class CategoriesUI : BaseUI , IUI
     {
-        CategoriesContext categoriesContext = new CategoriesContext();
-        int input;
-        string inputString;
-        bool loop;
 
-        public void Menu()
+        CategoriesLogic  logic = new CategoriesLogic();
+
+        public bool Menu()
         {
+            
             Console.Clear();
             Console.WriteLine("Ingrese:");
+
+            Console.WriteLine("0. Salir");
             Console.WriteLine("1. Mostrar todas las categorias");
             Console.WriteLine("2. Agregar categoria");
             Console.WriteLine("3. Eliminar categoria");
             Console.WriteLine("4. Modificar categoria");
-            Console.WriteLine("0. Salir");
+            Console.WriteLine("5. Volver al menú principal");
+            
 
             inputString = Console.ReadLine();
             if (Int32.TryParse(inputString, out input))
@@ -32,64 +34,48 @@ namespace Practica.EF.Presentation
                 switch (input)
                 {
                     case 1:
-                        ShowAllCategories();
+                        ShowAll();
                         break;
                     case 2:
-                        AddCategory();
+                        Add();
                         break;
                     case 3:
-                        DeleteCategory();
+                        Delete();
                         break;
                     case 4:
-                        UpdateCategory();
+                        Update();
                         break;
+                    case 5:
+                        return true;
                     case 0:
-                        return;
+                        return false;
+                    
                     default:
-                        GoBack();
+                        if (GoBack("categorias"))
+                            Menu();
                         break;
                 }
             }
             else
             {
                 Console.WriteLine("Error");
-                GoBack();
+                if (GoBack("categorias"))
+                    Menu();
             }
-
+            return false;
 
         }
-        private void ShowAllCategories()
+        public void ShowAll()
         {
             Console.Clear();
             Console.WriteLine("--------------------------------------------------------------------------------");
             Console.WriteLine("Mostrando todas las categorias");
-            categoriesContext.GetAll().ForEach(c => Console.WriteLine($"{c.CategoryID} - {c.CategoryName}"));
+            logic.GetAll().ForEach(c => Console.WriteLine($"{c.CategoryID} - {c.CategoryName}"));
             Console.WriteLine("--------------------------------------------------------------------------------");
-            GoBack();
-        }
-        private void GoBack()
-        {
-            loop = true;
-            do
-            {
-                Console.WriteLine("Para volver al menú de Categorias presione 1, para salir 0");
-                inputString = Console.ReadLine();
-                if (Int32.TryParse(inputString, out input))
-                {
-                    input = Int32.Parse(inputString);
-                    loop = (input==1 || input==0) ? false : true;
-                }
-            } while (loop);
-            if (input == 1)
-            {
+            if (GoBack("categorias"))
                 Menu();
-            }else
-            {
-                return;
-            }
-
         }
-        private void AddCategory()
+        public void Add()
         {
             Console.Clear();
             string name;
@@ -101,7 +87,7 @@ namespace Practica.EF.Presentation
 
             try
             {
-                categoriesContext.Add(new Categories
+                logic.Add(new Categories
                 {
                     CategoryName = name,
                     Description = description
@@ -112,9 +98,10 @@ namespace Practica.EF.Presentation
             {
                 Console.WriteLine("No se pudo agregar la categoria");
             }
-            GoBack();
+            if (GoBack("categorias"))
+                Menu();
         }
-        private void DeleteCategory()
+        public void Delete()
         {
             loop = true;
 
@@ -127,7 +114,7 @@ namespace Practica.EF.Presentation
                     input = Int32.Parse(inputString);
                     try
                     {
-                        categoriesContext.Delete(input);
+                        logic.Delete(input);
                         Console.WriteLine("Categoria elminada!");
                         loop = false;
                     }
@@ -142,10 +129,10 @@ namespace Practica.EF.Presentation
                     }
                 }
             } while (loop);
-            GoBack();
+            if (GoBack("categorias"))
+                Menu();
         }
-
-        private void UpdateCategory()
+        public void Update()
         {
             Console.Clear();
 
@@ -166,7 +153,7 @@ namespace Practica.EF.Presentation
                         name = Console.ReadLine();
                         Console.WriteLine("Ingrese descripcion de la categoria");
                         description = Console.ReadLine();
-                        categoriesContext.Update(new Categories
+                        logic.Update(new Categories
                         {
                             CategoryID = input,
                             CategoryName = name,
@@ -181,12 +168,13 @@ namespace Practica.EF.Presentation
                     }
                     catch (Exception)
                     {
-                        Console.WriteLine("No se pudo eliminar la categoria, intente nuevamente");
+                        Console.WriteLine("No se pudo modificar la categoria, intente nuevamente");
                         loop = false;
                     }
                 }
             } while (loop);
-            GoBack();
+            if (GoBack("categorias"))
+                Menu();
         }
     }
 }

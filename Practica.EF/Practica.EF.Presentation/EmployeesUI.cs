@@ -8,22 +8,20 @@ using Practica.EF.Entities;
 
 namespace Practica.EF.Presentation
 {
-    public class EmployeesUI
+    public class EmployeesUI : BaseUI , IUI
     {
-        EmployeesContext employeesContext = new EmployeesContext();
-        int input;
-        string inputString;
-        bool loop;
+        EmployeesLogic logic = new EmployeesLogic();
 
-        public void Menu()
+        public bool Menu()
         {
             Console.Clear();
             Console.WriteLine("Ingrese:");
+            Console.WriteLine("0. Salir");
             Console.WriteLine("1. Mostrar todos los empleados");
             Console.WriteLine("2. Agregar empleados");
             Console.WriteLine("3. Eliminar empleados");
             Console.WriteLine("4. Modificar empleados");
-            Console.WriteLine("0. Salir");
+            Console.WriteLine("5. Volver al menú principal");
 
             inputString = Console.ReadLine();
             if (Int32.TryParse(inputString, out input))
@@ -32,65 +30,46 @@ namespace Practica.EF.Presentation
                 switch (input)
                 {
                     case 1:
-                        ShowAllEmployees();
+                        ShowAll();
                         break;
                     case 2:
-                        AddEmployee();
+                        Add();
                         break;
                     case 3:
-                        DeleteEmployee();
+                        Delete();
                         break;
                     case 4:
-                        UpdateEmployee();
+                        Update();
                         break;
                     case 0:
-                        return;
+                        return false;
+                    case 5:
+                        return true;
                     default:
-                        GoBack();
+                        if (GoBack("empleados"))
+                            Menu();
                         break;
                 }
             }
             else
             {
                 Console.WriteLine("Error");
-                GoBack();
+                if (GoBack("empleados"))
+                    Menu();
             }
-
-
+            return false;
         }
-        private void ShowAllEmployees()
+        public void ShowAll()
         {
             Console.Clear();
             Console.WriteLine("--------------------------------------------------------------------------------");
             Console.WriteLine("Mostrando todos los empleados");
-            employeesContext.GetAll().ForEach(c => Console.WriteLine($"{c.EmployeeID} - {c.LastName}, {c.LastName}"));
+            logic.GetAll().ForEach(c => Console.WriteLine($"{c.EmployeeID} - {c.FirstName}, {c.LastName}"));
             Console.WriteLine("--------------------------------------------------------------------------------");
-            GoBack();
-        }
-        private void GoBack()
-        {
-            loop = true;
-            do
-            {
-                Console.WriteLine("Para volver al menú de Empleados presione 1, para salir 0");
-                inputString = Console.ReadLine();
-                if (Int32.TryParse(inputString, out input))
-                {
-                    input = Int32.Parse(inputString);
-                    loop = (input == 1 || input == 0) ? false : true;
-                }
-            } while (loop);
-            if (input == 1)
-            {
+            if (GoBack("empleados"))
                 Menu();
-            }
-            else if (input == 0)
-            {
-                return;
-            }
-
         }
-        private void AddEmployee()
+        public void Add()
         {
             Console.Clear();
             string name;
@@ -103,7 +82,7 @@ namespace Practica.EF.Presentation
             //TODO: ingresar el resto de los campos
             try
             {
-                employeesContext.Add(new Employees
+                logic.Add(new Employees
                 {
                     FirstName = name,
                     LastName = lastname
@@ -114,9 +93,10 @@ namespace Practica.EF.Presentation
             {
                 Console.WriteLine("No se pudo agregar el empleado");
             }
-            GoBack();
+            if (GoBack("empleados"))
+                Menu();
         }
-        private void DeleteEmployee()
+        public void Delete()
         {
             loop = true;
 
@@ -129,7 +109,7 @@ namespace Practica.EF.Presentation
                     input = Int32.Parse(inputString);
                     try
                     {
-                        employeesContext.Delete(input);
+                        logic.Delete(input);
                         Console.WriteLine("Empleado elminado!");
                         loop = false;
                     }
@@ -144,10 +124,10 @@ namespace Practica.EF.Presentation
                     }
                 }
             } while (loop);
-            GoBack();
+            if (GoBack("empleados"))
+                Menu();
         }
-
-        private void UpdateEmployee()
+        public void Update()
         {
             Console.Clear();
 
@@ -171,7 +151,7 @@ namespace Practica.EF.Presentation
 
                         //TODO: ingresar el resto de los campos
 
-                        employeesContext.Add(new Employees
+                        logic.Update(new Employees
                         {
                             EmployeeID = input,
                             FirstName = name,
@@ -191,7 +171,8 @@ namespace Practica.EF.Presentation
                     }
                 }
             } while (loop);
-            GoBack();
+            if (GoBack("empleados"))
+                Menu();
         }
     }
 }

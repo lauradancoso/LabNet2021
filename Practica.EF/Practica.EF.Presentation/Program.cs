@@ -15,28 +15,32 @@ namespace Practica.EF.Presentation
 
             CategoriesUI categoriesUI = new CategoriesUI();
             EmployeesUI employeesUI = new EmployeesUI();
+
             string input;
+            bool loop = false;
 
-            Console.WriteLine("Escriba 'a' para operar con las categorias, o 'b' para operar con los empleados");
-            input = Console.ReadLine();
+            do {
+                Console.WriteLine("Escriba:");
+                Console.WriteLine("1. Para operar con las categorias");
+                Console.WriteLine("2. Para operar con los empleados");
+                input = Console.ReadLine();
 
-            switch (input)
-            {
-                case "a":
-                    categoriesUI.Menu();
-                    break;
-                case "b":
-                    employeesUI.Menu();
-                    break;
-                default:
-                    Console.WriteLine("Error, corra el programa de nuevo para volver a empezar");
-                    break;
-            }
+                switch (input)
+                {
+                    case "1":
+                        loop = categoriesUI.Menu();
+                        break;
+                    case "2":
+                        loop = employeesUI.Menu();
+                        break;
+                    default:
+                        Console.WriteLine("Error, corra el programa de nuevo para volver a empezar");
+                        break;
+                }
+            } while (loop);
+
+            Console.WriteLine("Adiós!");
             Console.ReadLine();
-
-
-            
-
         }
     }
 }
