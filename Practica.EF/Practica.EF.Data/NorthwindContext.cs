@@ -94,10 +94,6 @@ namespace Practica.EF.Data
             modelBuilder.Entity<Territories>()
                 .Property(e => e.TerritoryDescription)
                 .IsFixedLength();
-            modelBuilder.Entity<Categories>()
-                .HasMany(e => e.Products)
-                .WithRequired()
-                .WillCascadeOnDelete();
         }
     }
 }
