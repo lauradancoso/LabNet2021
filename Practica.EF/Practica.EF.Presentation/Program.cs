@@ -32,6 +32,8 @@ namespace Practica.EF.Presentation
 
             Action<string, Action> print = (consigna, query) =>
                                                             {
+                                                                Console.Clear();
+                                                                Console.WriteLine("\n--------------------------------------------------------------------------------\n");
                                                                 Console.WriteLine($"{consigna}\n");
                                                                 query();
                                                                 Console.WriteLine("\n--------------------------------------------------------------------------------\n");
@@ -43,11 +45,18 @@ namespace Practica.EF.Presentation
 
             do
             {
+
                 consignas.ForEach(c => Console.WriteLine(c));
+
                 inputString = Console.ReadLine();
                 try
                 {
                     switch(Int32.Parse(inputString)){
+
+                        case 0:
+                            Console.WriteLine("Hasta luego!");
+                            loop = false;
+                            break;
 
                         case 1:
 
@@ -69,7 +78,7 @@ namespace Practica.EF.Presentation
 
                         case 4:
 
-                            print(consignas[4], () => querys.GetCustomersFromWA().ToList().ForEach(c => Console.WriteLine($"Customer ID: {c.CustomerID} - {c.ContactName} : {c.ContactTitle} - Region: {c.Region}"))));
+                            print(consignas[4], () => querys.GetCustomersFromWA().ToList().ForEach(c => Console.WriteLine($"Customer ID: {c.CustomerID} - {c.ContactName} : {c.ContactTitle} - Region: {c.Region}")));
 
                             break;
 
@@ -78,6 +87,7 @@ namespace Practica.EF.Presentation
                             print(consignas[5], () =>
                             {
                                 var query5 = querys.GetFirstProductWithId789();
+
                                 Console.WriteLine((query5 == null) ? "No existe elemento con el ID 789" : string.Format("ID: {0} - Nombre: {1}", query5.ProductID, query5.ProductName));
                             });
 
@@ -94,48 +104,52 @@ namespace Practica.EF.Presentation
 
                             break;
 
-                        case 0:
-                            loop = false;
+                        case 8:
+
+                            print(consignas[8], () => querys.Get3CustomersFromWA().ToList().ForEach(c => Console.WriteLine($"Customer ID: {c.CustomerID} - {c.ContactName} : {c.ContactTitle} - Region: {c.Region}")));
+
                             break;
 
+                        case 9:
+
+                            print(consignas[9], () => querys.GetProductsOrderedByName().ToList().ForEach(p => Console.WriteLine(string.Format("ID: {0} - Nombre: {1}", p.ProductID, p.ProductName))));
+
+                            break;
+
+                        case 10:
+
+                            print(consignas[10], () => querys.GetProductsOrderedByUnitInStock().ToList().ForEach(p => Console.WriteLine(string.Format("ID: {0} - Nombre: {1} - Stock: {2}", p.ProductID, p.ProductName, p.UnitsInStock))));
+
+                            break;
+
+                        case 11:
+
+                            print(consignas[11], () => querys.GetCategoriesWithProductsAsociated().ToList().ForEach(c => Console.WriteLine(string.Format("Nombre categoria: {0}", c))));
+
+                            break;
+
+                        case 12:
+
+                            print(consignas[12], () => querys.GetFirstProduct().ToList().ForEach(p => Console.WriteLine(string.Format("ID Producto: {0} - Nombre: {1}", p.ProductID, p.ProductName))));
+
+                            break;
+
+                        case 13:
+
+                            print(consignas[13], () => querys.GetCustomersOrdersCount().ToList().ForEach(c => Console.WriteLine(string.Format("ID Customer: {0} - Nombre: {1} - Cantidad de ordenes : {2}", c.CustomerID, c.CompanyName, c.CantOrders))));
+
+                            break;
                     }
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("No se pudo realizar la operación. Vuelva a intentar");
+                    Console.Clear();
+                    Console.WriteLine("\n--------------------------------------------------------------------------------\n");
+                    Console.WriteLine("Por alguna razón no se pudo realizar la operación. Vuelva a intentar ");
+                    Console.WriteLine("\n--------------------------------------------------------------------------------\n");
                 }
 
             } while (loop);
-            //print(consignas[1], ()=> querys.GetCustomer("ALFKI").ToList().ForEach(c => Console.WriteLine($"Customer ID:{c.CustomerID} - {c.ContactName} : {c.ContactTitle}")));
-
-            //print(consignas[2], ()=> querys.GetProductsOutOfStock().ToList().ForEach(p=>Console.WriteLine($" ID: {p.ProductID} - Nombre: {p.ProductName} - Stock: {p.UnitsInStock}")));
-
-            //print(consignas[3], ()=> querys.GetProductsInStockWithUnitPrice3().ToList().ForEach(p => Console.WriteLine($" ID: {p.ProductID} - Nombre: {p.ProductName} - Stock: {p.UnitsInStock} - Precio unitario: ${p.UnitPrice}")));
-
-            //print(consignas[4], ()=> querys.GetCustomersFromWA().ToList().ForEach(c => Console.WriteLine($"Customer ID: {c.CustomerID} - {c.ContactName} : {c.ContactTitle} - Region: {c.Region}"))));
-
-            //print(consignas[5], () =>
-            //{
-            //    var query5 = querys.GetFirstProductWithId789();
-            //    Console.WriteLine((query5 == null) ? "No existe elemento con el ID 789" : string.Format("ID: {0} - Nombre: {1}", query5.ProductID, query5.ProductName));
-            //});
-
-            //print(consignas[6], () => querys.GetCustomersName().ToList().ForEach(c => Console.WriteLine($"Customer : {c} - CUSTOMER: {c.ToUpper()} ")));
-
-            //print(consignas[7], ()=> querys.GetCustomersOrdersJoin().ToList().ForEach(c => Console.WriteLine($"Customer ID: {c.CustomerID} - Customer name: {c.CompanyName} - Region: {c.Region} - Fecha de orden: {c.OrderDate}")));
-
-            //print(consignas[8], () => querys.Get3CustomersFromWA().ToList().ForEach(c => Console.WriteLine($"Customer ID: {c.CustomerID} - {c.ContactName} : {c.ContactTitle} - Region: {c.Region}")));
-
-            //print(consignas[9], () => querys.GetProductsOrderedByName().ToList().ForEach(p => Console.WriteLine(string.Format("ID: {0} - Nombre: {1}", p.ProductID, p.ProductName))));
-
-            //print(consignas[10], () => querys.GetProductsOrderedByUnitInStock().ToList().ForEach(p => Console.WriteLine(string.Format("ID: {0} - Nombre: {1} - Stock: {2}", p.ProductID, p.ProductName, p.UnitsInStock))));
-
-            //print(consignas[11], () => querys.GetCategoriesWithProductsAsociated().ToList().ForEach(c => Console.WriteLine(string.Format("Nombre categoria: {0}", c))));
-
-            //print(consignas[12], () => querys.GetFirstProduct().ToList().ForEach(p => Console.WriteLine(string.Format("ID Producto: {0} - Nombre: {1}", p.ProductID, p.ProductName))));
-
-            //print(consignas[13], () => querys.GetCustomersOrdersCount().ToList().ForEach(c => Console.WriteLine(string.Format("ID Customer: {0} - Nombre: {1} - Cantidad de ordenes : {2}", c.CustomerID, c.CompanyName, c.CantOrders))));
-
 
             Console.ReadLine();
 
