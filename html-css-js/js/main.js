@@ -1,7 +1,7 @@
 // Cuando carga el documento
 jQuery(document).ready(function () {
   "use strict";
-  $("#reset").click(() => resetForm());
+  $("#reset").click(() => askForResetForm());
   showOrHideElements($(".InvalidFeedback"), false, $(".ValidFeedback"), false);
   $("form").on("input", (e) => validateFullName(e));
   $("form").submit((e) => submitForm(e));
@@ -9,11 +9,35 @@ jQuery(document).ready(function () {
 
 let submitValid = false;
 
+const askForResetForm = () => {
+  $("#InputName").focus();
+  Swal.fire({
+    title: "Estas seguro?",
+    text: "Se borrarán los campos",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, borrar!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      showOrHideElements(
+        $(".InvalidFeedback"),
+        false,
+        $(".ValidFeedback"),
+        false
+      );
+
+      resetForm();
+    }
+  });
+};
 const resetForm = () => {
   $("form input:text").val("");
   $("form input[type='number']").prop("value", "");
   $("form input:radio").prop("checked", false);
 };
+
 const validateFullName = (e) => {
   let inputName = $("#InputName").val().trim();
   let inputLastName = $("#InputLastname").val().trim();
@@ -47,8 +71,7 @@ const validateFullName = (e) => {
 };
 const submitForm = (e) => {
   e.preventDefault();
-  alert(submitValid ? "Formulario enviado" : "Verifique la información");
-  if (submitValid) resetForm();
+  if (submitValid ? success() : error());
 };
 const showOrHideElements = (
   firstElement,
@@ -58,4 +81,19 @@ const showOrHideElements = (
 ) => {
   firstShow ? firstElement.show() : firstElement.hide();
   secondShow ? secondElement.show() : secondElement.hide();
+};
+const error = () =>
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: "Verifique que la información esté correcta",
+  });
+const success = () => {
+  $("#InputName").focus();
+  Swal.fire({
+    title: "Formulario listo para enviar!",
+    icon: "success",
+    timer: 1500,
+    showCloseButton: true,
+  }).then(() => resetForm());
 };
