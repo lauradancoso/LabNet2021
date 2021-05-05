@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacto</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Main css file -->
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <!-- Style -->
+    <style>
+      #InputAge {
+        width: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>CONTACTO</h1>
+    </header>
+    <main>
+      <h4>Completa tus Datos</h4>
+      <form style="max-width: 370px" autocomplete="off">
+        <fieldset>
+          <legend>Información personal</legend>
+          <div id="DivName">
+            <label for="InputName"> Nombre: </label>
+            <input type="text" id="InputName" name="InputName" autofocus />
+            <div class="InvalidFeedback">Campo requerido</div>
+            <div class="ValidFeedback">Campo correcto</div>
+          </div>
+          <div id="DivLastName">
+            <label for="InputLastname"> Apellido: </label>
+            <input type="text" id="InputLastname" name="InputLastname" />
+            <div class="InvalidFeedback">Campo requerido</div>
+            <div class="ValidFeedback">Campo correcto</div>
+          </div>
+          <div id="DivAge">
+            <label for="InputAge"> Edad: </label>
+            <input
+              type="number"
+              id="InputAge"
+              name="InputAge"
+              min="18"
+              max="99"
+              required
+            />
+          </div>
+          <div id="DivGender">
+            <div>
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="male"
+                required
+              />
+              <label for="male">Masculino</label>
+            </div>
+            <div>
+              <input type="radio" id="female" name="gender" value="female" />
+              <label for="female">Femenino</label>
+            </div>
+            <div>
+              <input type="radio" id="other" name="gender" value="other" />
+              <label for="other">Otro</label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Información adicional</legend>
+          <div>
+            <label for="empresa"> Empresa: </label>
+            <input type="text" id="empresa" />
+          </div>
+        </fieldset>
+        <div>
+          <input class="button" type="submit" value="Submit" />
+          <input class="button" type="button" value="Reset" id="reset" />
+        </div>
+      </form>
+    </main>
+    <footer>
+      <a
+        target="_blank"
+        href="https://github.com/lauradancoso/LabNet2021/tree/ejercicio-5-html-css-js"
+      >
+        <img src="./assets/GitHub-32px.png" alt="GithubLogo" />
+        <span>Laura Dancoso</span>
+      </a>
+    </footer>
+    <!-- Jquery Library -->
+    <script src="./lib/jquery-3.6.9.min.js"></script>
+    <!-- Main js file -->
+    <script src="./js/main.js"></script>
+  </body>
+</html>
