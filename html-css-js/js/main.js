@@ -2,13 +2,13 @@
 jQuery(document).ready(function () {
   "use strict";
   $("#reset").click(() => resetForm());
-  $(".InvalidFeedback").hide();
-  $(".ValidFeedback").hide();
+  showOrHideElements($(".InvalidFeedback"), false, $(".ValidFeedback"), false);
   $("form").on("input", (e) => validateFullName(e));
   $("form").submit((e) => submitForm(e));
 });
 
 let submitValid = false;
+
 const resetForm = () => {
   $("form input:text").val("");
   $("form input[type='number']").prop("value", "");
@@ -17,36 +17,45 @@ const resetForm = () => {
 const validateFullName = (e) => {
   let inputName = $("#InputName").val().trim();
   let inputLastName = $("#InputLastname").val().trim();
-  let re = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}$/u;
-  let isValid = re.test(inputName) && re.test(inputLastName);
 
-  $(".InvalidFeedback").hide();
-  $(".ValidFeedback").hide();
-  if (re.test(inputName)) {
-    $("#DivName .InvalidFeedback").hide();
-    $("#DivName .ValidFeedback").show();
-  } else {
-    $("#DivName .InvalidFeedback").show();
-    $("#DivName .ValidFeedback").hide();
-  }
-  if (re.test(inputLastName)) {
-    $("#DivLastName .InvalidFeedback").hide();
-    $("#DivLastName .ValidFeedback").show();
-  } else {
-    $("#DivLastName .InvalidFeedback").show();
-    $("#DivLastName .ValidFeedback").hide();
-  }
-  if (isValid) {
-    $(".InvalidFeedback").hide();
-    $(".ValidFeedback").hide();
-    submitValid = true;
-  }
+  let divNameValid = $("#DivName .ValidFeedback");
+  let divNameInvalid = $("#DivName .InvalidFeedback");
+  let divLastNameValid = $("#DivLastName .ValidFeedback");
+  let divLastNameInvalid = $("#DivLastName .InvalidFeedback");
+
+  let re = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}$/u;
+  let fullNameisValid = re.test(inputName) && re.test(inputLastName);
+
+  showOrHideElements($(".InvalidFeedback"), false, $(".ValidFeedback"), false);
+
+  re.test(inputName)
+    ? showOrHideElements(divNameInvalid, false, divNameValid, true)
+    : showOrHideElements(divNameInvalid, true, divNameValid, false);
+
+  re.test(inputLastName)
+    ? showOrHideElements(divLastNameInvalid, false, divLastNameValid, true)
+    : showOrHideElements(divLastNameInvalid, true, divLastNameValid, false);
+
+  if (fullNameisValid)
+    showOrHideElements(
+      $(".InvalidFeedback"),
+      false,
+      $(".ValidFeedback"),
+      false
+    );
+  submitValid = fullNameisValid;
 };
 const submitForm = (e) => {
   e.preventDefault();
-  if (submitValid) {
-    alert("Formulario enviado");
-  } else {
-    alert("Verifique la información");
-  }
+  alert(submitValid ? "Formulario enviado" : "Verifique la información");
+  if (submitValid) resetForm();
+};
+const showOrHideElements = (
+  firstElement,
+  firstShow,
+  secondElement,
+  secondShow
+) => {
+  firstShow ? firstElement.show() : firstElement.hide();
+  secondShow ? secondElement.show() : secondElement.hide();
 };
