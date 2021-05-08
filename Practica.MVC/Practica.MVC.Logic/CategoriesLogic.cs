@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Practica.MVC.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Practica.MVC.Entities;
 
 namespace Practica.MVC.Logic
 {
@@ -17,8 +14,9 @@ namespace Practica.MVC.Logic
 
         public void Delete(int id)
         {
-
             var categorieToDelete = context.Categories.Find(id);
+            categorieToDelete.Products.Clear();
+            context.SaveChanges();
             context.Categories.Remove(categorieToDelete);
             context.SaveChanges();
 
