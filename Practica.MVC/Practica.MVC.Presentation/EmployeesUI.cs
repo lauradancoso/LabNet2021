@@ -48,17 +48,21 @@ namespace Practica.MVC.Presentation
                     default:
                         break;
                 }
-                if (GoBack("empleados")){
+                if (GoBack("empleados"))
+                {
                     Menu();
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
-                } 
+                }
             }
             else
             {
                 Console.WriteLine("Error");
-                if (GoBack("empleados")){
+                if (GoBack("empleados"))
+                {
                     Menu();
                     return true;
                 }
@@ -68,7 +72,7 @@ namespace Practica.MVC.Presentation
                 }
             }
 
-           
+
         }
         public void ShowAll()
         {
@@ -120,9 +124,11 @@ namespace Practica.MVC.Presentation
                         Console.WriteLine("Empleado elminado!");
                         loop = false;
                     }
-                    catch (ArgumentNullException)
+                    catch (NullReferenceException)
                     {
-                        Console.WriteLine("No existe ese ID, intente nuevamente");
+                        Console.WriteLine("No existe ese ID, intente nuevamente, de lo contrario, presione 0 para salir");
+                        if (Console.ReadLine().Equals("0"))
+                            loop = false;
                     }
                     catch (Exception)
                     {
@@ -165,9 +171,11 @@ namespace Practica.MVC.Presentation
                         Console.WriteLine("Empleado modificado!");
                         loop = false;
                     }
-                    catch (ArgumentNullException)
+                    catch (NullReferenceException)
                     {
-                        Console.WriteLine("No existe ese ID, intente nuevamente");
+                        Console.WriteLine("No existe ese ID, intente nuevamente, de lo contrario, presione 0 para salir");
+                        if (Console.ReadLine().Equals("0"))
+                            loop = false;
                     }
                     catch (Exception)
                     {
@@ -176,7 +184,7 @@ namespace Practica.MVC.Presentation
                     }
                 }
             } while (loop);
-            
+
         }
     }
 }
