@@ -11,21 +11,20 @@ namespace Practica.EF.Presentation
     public class CategoriesUI : BaseUI , IUI
     {
 
-        CategoriesLogic  logic = new CategoriesLogic();
+        CategoriesLogic logic = new CategoriesLogic();
 
         public bool Menu()
         {
-            
+
             Console.Clear();
             Console.WriteLine("Ingrese:");
-
             Console.WriteLine("0. Salir");
             Console.WriteLine("1. Mostrar todas las categorias");
             Console.WriteLine("2. Agregar categoria");
             Console.WriteLine("3. Eliminar categoria");
             Console.WriteLine("4. Modificar categoria");
             Console.WriteLine("5. Volver al menú principal");
-            
+
 
             inputString = Console.ReadLine();
             if (Int32.TryParse(inputString, out input))
@@ -49,21 +48,33 @@ namespace Practica.EF.Presentation
                         return true;
                     case 0:
                         return false;
-                    
+
                     default:
-                        if (GoBack("categorias"))
-                            Menu();
                         break;
+                }
+                if (GoBack("categorias"))
+                {
+                    Menu();
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
             {
                 Console.WriteLine("Error");
                 if (GoBack("categorias"))
+                {
                     Menu();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            return false;
-
         }
         public void ShowAll()
         {
@@ -72,8 +83,6 @@ namespace Practica.EF.Presentation
             Console.WriteLine("Mostrando todas las categorias");
             logic.GetAll().ForEach(c => Console.WriteLine($"{c.CategoryID} - {c.CategoryName}"));
             Console.WriteLine("--------------------------------------------------------------------------------");
-            if (GoBack("categorias"))
-                Menu();
         }
         public void Add()
         {
@@ -98,8 +107,6 @@ namespace Practica.EF.Presentation
             {
                 Console.WriteLine("No se pudo agregar la categoria");
             }
-            if (GoBack("categorias"))
-                Menu();
         }
         public void Delete()
         {
@@ -129,8 +136,6 @@ namespace Practica.EF.Presentation
                     }
                 }
             } while (loop);
-            if (GoBack("categorias"))
-                Menu();
         }
         public void Update()
         {
@@ -173,8 +178,6 @@ namespace Practica.EF.Presentation
                     }
                 }
             } while (loop);
-            if (GoBack("categorias"))
-                Menu();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Practica.EF.Presentation
                 if (Int32.TryParse(inputString, out input))
                 {
                     input = Int32.Parse(inputString);
-                    loop = (input == 1 || input == 0) ? false : true;
+                    loop = input != 1 && input != 0;
                 }
             } while (loop);
 

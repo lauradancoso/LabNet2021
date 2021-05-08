@@ -46,18 +46,33 @@ namespace Practica.EF.Presentation
                     case 5:
                         return true;
                     default:
-                        if (GoBack("empleados"))
-                            Menu();
                         break;
+                }
+                if (GoBack("empleados"))
+                {
+                    Menu();
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
             {
                 Console.WriteLine("Error");
                 if (GoBack("empleados"))
+                {
                     Menu();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            return false;
+
+
         }
         public void ShowAll()
         {
@@ -66,8 +81,6 @@ namespace Practica.EF.Presentation
             Console.WriteLine("Mostrando todos los empleados");
             logic.GetAll().ForEach(c => Console.WriteLine($"{c.EmployeeID} - {c.FirstName}, {c.LastName}"));
             Console.WriteLine("--------------------------------------------------------------------------------");
-            if (GoBack("empleados"))
-                Menu();
         }
         public void Add()
         {
@@ -93,8 +106,6 @@ namespace Practica.EF.Presentation
             {
                 Console.WriteLine("No se pudo agregar el empleado");
             }
-            if (GoBack("empleados"))
-                Menu();
         }
         public void Delete()
         {
@@ -124,8 +135,6 @@ namespace Practica.EF.Presentation
                     }
                 }
             } while (loop);
-            if (GoBack("empleados"))
-                Menu();
         }
         public void Update()
         {
@@ -171,8 +180,7 @@ namespace Practica.EF.Presentation
                     }
                 }
             } while (loop);
-            if (GoBack("empleados"))
-                Menu();
+
         }
     }
 }
