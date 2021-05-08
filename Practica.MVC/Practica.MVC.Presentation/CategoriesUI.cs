@@ -52,13 +52,10 @@ namespace Practica.MVC.Presentation
                     default:
                         break;
                 }
-                if (GoBack("categorias"))
-                {
+                if (GoBack("categorias")){
                     Menu();
                     return true;
-                }
-                else
-                {
+                }else{
                     return false;
                 }
             }
@@ -83,8 +80,6 @@ namespace Practica.MVC.Presentation
             Console.WriteLine("Mostrando todas las categorias");
             logic.GetAll().ForEach(c => Console.WriteLine($"{c.CategoryID} - {c.CategoryName}"));
             Console.WriteLine("--------------------------------------------------------------------------------");
-            if (GoBack("categorias"))
-                Menu();
         }
         public void Add()
         {
@@ -109,8 +104,6 @@ namespace Practica.MVC.Presentation
             {
                 Console.WriteLine("No se pudo agregar la categoria");
             }
-            if (GoBack("categorias"))
-                Menu();
         }
         public void Delete()
         {
@@ -140,8 +133,6 @@ namespace Practica.MVC.Presentation
                     }
                 }
             } while (loop);
-            if (GoBack("categorias"))
-                Menu();
         }
         public void Update()
         {
@@ -184,8 +175,6 @@ namespace Practica.MVC.Presentation
                     }
                 }
             } while (loop);
-            if (GoBack("categorias"))
-                Menu();
         }
     }
 }

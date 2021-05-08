@@ -21,6 +21,7 @@ namespace Practica.MVC.Presentation
                 Console.WriteLine("Escriba:");
                 Console.WriteLine("1. Para operar con las categorias");
                 Console.WriteLine("2. Para operar con los empleados");
+                Console.WriteLine("3. Para Salir");
                 input = Console.ReadLine();
 
                 switch (input)
@@ -31,8 +32,12 @@ namespace Practica.MVC.Presentation
                     case "2":
                         loop = employeesUI.Menu();
                         break;
+                    case "3":
+                        loop = false;
+                        break;
                     default:
                         Console.WriteLine("Error");
+                        loop= true;
                         break;
                 }
             } while (loop);
