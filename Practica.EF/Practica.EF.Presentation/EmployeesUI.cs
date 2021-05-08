@@ -124,9 +124,11 @@ namespace Practica.EF.Presentation
                         Console.WriteLine("Empleado elminado!");
                         loop = false;
                     }
-                    catch (ArgumentNullException)
+                    catch (NullReferenceException)
                     {
-                        Console.WriteLine("No existe ese ID, intente nuevamente");
+                        Console.WriteLine("No existe ese ID, intente nuevamente, de lo contrario, presione 0 para salir");
+                        if (Console.ReadLine().Equals("0"))
+                            loop = false;
                     }
                     catch (Exception)
                     {
@@ -169,9 +171,11 @@ namespace Practica.EF.Presentation
                         Console.WriteLine("Empleado modificado!");
                         loop = false;
                     }
-                    catch (ArgumentNullException)
+                    catch (NullReferenceException)
                     {
-                        Console.WriteLine("No existe ese ID, intente nuevamente");
+                        Console.WriteLine("No existe ese ID, intente nuevamente, de lo contrario, presione 0 para salir");
+                        if (Console.ReadLine().Equals("0"))
+                            loop = false;
                     }
                     catch (Exception)
                     {

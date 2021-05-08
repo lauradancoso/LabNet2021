@@ -17,10 +17,13 @@ namespace Practica.EF.Logic
 
         public void Delete(int id)
         {
-           
-                var employeeToDelete = context.Employees.Find(id);
-                context.Employees.Remove(employeeToDelete);
-                context.SaveChanges();
+            var employeeToDelete = context.Employees.Find(id);
+            employeeToDelete.Employees1.Clear();
+            employeeToDelete.Orders.Clear();
+            employeeToDelete.Territories.Clear();
+            context.SaveChanges();
+            context.Employees.Remove(employeeToDelete);
+            context.SaveChanges();
             
         }
 

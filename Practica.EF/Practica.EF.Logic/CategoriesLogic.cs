@@ -17,8 +17,9 @@ namespace Practica.EF.Logic
 
         public void Delete(int id)
         {
-            
                 var categorieToDelete = context.Categories.Find(id);
+                categorieToDelete.Products.Clear();
+                context.SaveChanges();
                 context.Categories.Remove(categorieToDelete);
                 context.SaveChanges();
             

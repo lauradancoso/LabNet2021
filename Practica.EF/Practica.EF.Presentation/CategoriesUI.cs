@@ -125,11 +125,14 @@ namespace Practica.EF.Presentation
                         Console.WriteLine("Categoria elminada!");
                         loop = false;
                     }
-                    catch (ArgumentNullException)
+                    catch (NullReferenceException)
                     {
-                        Console.WriteLine("No existe ese ID, intente nuevamente");
+                        Console.WriteLine("No existe ese ID, intente nuevamente, de lo contrario, presione 0 para salir");
+                        if (Console.ReadLine().Equals("0"))
+                            loop = false;
+                        
                     }
-                    catch (System.Data.Entity.Infrastructure.DbUpdateException)
+                    catch (Exception)
                     {
                         Console.WriteLine("No se pudo eliminar la categoria por un problema en la base de datos, intente nuevamente");
                         loop = false;
@@ -167,9 +170,11 @@ namespace Practica.EF.Presentation
                         Console.WriteLine("Categoria modificada!");
                         loop = false;
                     }
-                    catch (ArgumentNullException)
+                    catch (NullReferenceException)
                     {
-                        Console.WriteLine("No existe ese ID, intente nuevamente");
+                        Console.WriteLine("No existe ese ID, intente nuevamente, de lo contrario, presione 0 para salir");
+                        if (Console.ReadLine().Equals("0"))
+                            loop = false;
                     }
                     catch (Exception)
                     {
