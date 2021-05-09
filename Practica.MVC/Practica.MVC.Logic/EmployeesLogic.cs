@@ -41,7 +41,11 @@ namespace Practica.MVC.Logic
             employeeToUpdate.TitleOfCourtesy = updatedT.TitleOfCourtesy;
             employeeToUpdate.BirthDate = updatedT.BirthDate;
             employeeToUpdate.HireDate = updatedT.HireDate;
-            ///TODO seguir!
+            employeeToUpdate.Address = updatedT.Address;
+            employeeToUpdate.City = updatedT.City;
+            employeeToUpdate.Country = updatedT.Country;
+            employeeToUpdate.HomePhone = updatedT.HomePhone;
+            employeeToUpdate.PostalCode = updatedT.PostalCode;
 
             context.SaveChanges();
 

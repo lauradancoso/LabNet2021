@@ -3,11 +3,11 @@
     string butttonName;
     if (Model == null)
     {
-        butttonName = "Agregar";
+        butttonName = "Add";
     }
     else
     {
-        butttonName = (Model.CategoryID == 0) ? "Agregar" : "Modificar";
+        butttonName = (Model.CategoryID == 0) ? "Add" : "Edit";
     }
     ViewBag.Title = butttonName + " Category";
 }
