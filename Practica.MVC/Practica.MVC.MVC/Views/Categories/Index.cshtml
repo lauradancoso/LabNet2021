@@ -1,0 +1,39 @@
+﻿@model List<Practica.MVC.MVC.Models.CategoriesView>
+@{
+    ViewBag.Title = "Categories";
+}
+<div class="row">
+    <div class="col-md-10">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col-md-2 clearfix">
+        @Html.ActionLink("Add category", "InsertOrEdit", new { id = 0 }, new { @class = "btn btn-warning float-right"})
+    </div>
+    <div class="col-md-12 mt-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cat in Model)
+                {
+                    <tr>
+                        <th scope="row">@cat.CategoryID</th>
+                        <td>@cat.CategoryName</td>
+                        <td>@cat.Description</td>
+                        <td>
+                            @Html.ActionLink("Edit", "InsertOrEdit", new { id = cat.CategoryID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "Delete", new{ id = cat.CategoryID } , new { @class = "btn btn-danger" , onclick = "return confirm('Are you sure?')" })
+                            @*realizar de alguna manera confimarmacion de eliminar con sweetalert*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
