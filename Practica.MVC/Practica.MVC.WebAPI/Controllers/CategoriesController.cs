@@ -29,6 +29,35 @@ namespace Practica.MVC.WebAPI.Controllers
             return categoriesRequest;
         }
 
+        public CategoriesRequest Get(int id)
+        {
+            
+            try
+            {
+                Categories category = logic.GetOne(id);
+
+                if (category == null) {
+                    return null;
+                    //Esto estaría correcto? o debería retornar un IHTTResult en vez de Categories y hacer como el resto? no sé..
+                }
+
+                CategoriesRequest categoryRequest = new CategoriesRequest
+                {
+                    CategoryID = category.CategoryID,
+                    CategoryName = category.CategoryName,
+                    Description = category.Description
+
+                };
+
+                return categoryRequest;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+
         [HttpPost]
         public IHttpActionResult Post([FromBody] CategoriesRequest categoryRequest)
         {

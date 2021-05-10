@@ -26,6 +26,10 @@ namespace Practica.MVC.Logic
         {
             return context.Categories.ToList();
         }
+        public Categories GetOne(int id)
+        {
+            return context.Categories.FirstOrDefault(c=>c.CategoryID == id);
+        }
 
         public void Update(Categories updatedT)
         {
