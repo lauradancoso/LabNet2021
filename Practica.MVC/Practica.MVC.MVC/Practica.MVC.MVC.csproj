@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\DogController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -136,6 +137,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoriesView.cs" />
+    <Compile Include="Models\DogView.cs" />
     <Compile Include="Models\EmployeesEditView.cs" />
     <Compile Include="Models\EmployeesView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -286,6 +288,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\InsertOrEdit.cshtml" />
+    <Content Include="Views\Dog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

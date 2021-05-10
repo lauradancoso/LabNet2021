@@ -12,9 +12,9 @@
     string butttonName = (add) ? "Add" : "Edit";
     ViewBag.Title = butttonName + " Employee";
 }
-<h2>@ViewBag.Title</h2>
+<h2 class="mt-3">@ViewBag.Title</h2>
 <div class="row">
-    <div class="col-md-12 mt-4">
+    <div class="col-md-12">
         @using (Html.BeginForm("InsertOrEdit", "Employees", FormMethod.Post))
         {
             @Html.HiddenFor(e => e.EmployeeID);
