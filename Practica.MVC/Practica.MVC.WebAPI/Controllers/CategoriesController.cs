@@ -15,7 +15,7 @@ namespace Practica.MVC.WebAPI.Controllers
     {
         CategoriesLogic logic = new CategoriesLogic();
 
-        public IEnumerable<CategoriesRequest> Get()
+        public IHttpActionResult Get()
         {
             List<Categories> categories = logic.GetAll();
             List<CategoriesRequest> categoriesRequest = categories.Select(c => new CategoriesRequest
@@ -26,10 +26,10 @@ namespace Practica.MVC.WebAPI.Controllers
 
             }).ToList();
 
-            return categoriesRequest;
+            return Ok(categoriesRequest);
         }
 
-        public CategoriesRequest Get(int id)
+        public IHttpActionResult Get(int id)
         {
             
             try
@@ -37,8 +37,7 @@ namespace Practica.MVC.WebAPI.Controllers
                 Categories category = logic.GetOne(id);
 
                 if (category == null) {
-                    return null;
-                    //Esto estaría correcto? o debería retornar un IHTTResult en vez de Categories y hacer como el resto? no sé..
+                    return InternalServerError();
                 }
 
                 CategoriesRequest categoryRequest = new CategoriesRequest
@@ -49,7 +48,7 @@ namespace Practica.MVC.WebAPI.Controllers
 
                 };
 
-                return categoryRequest;
+                return Ok(categoryRequest);
             }
             catch (Exception)
             {
@@ -74,7 +73,7 @@ namespace Practica.MVC.WebAPI.Controllers
                 };
                 logic.Add(categoryEntity);
 
-                return Ok(categoryEntity);
+                return Ok();
 
             }
             catch (Exception)
@@ -115,7 +114,7 @@ namespace Practica.MVC.WebAPI.Controllers
                 };
                 logic.Update(categoryEntity);
 
-                return Ok(categoryEntity);
+                return Ok();
 
             }
             catch (Exception)
