@@ -17,16 +17,25 @@ namespace Practica.MVC.WebAPI.Controllers
 
         public IHttpActionResult Get()
         {
-            List<Categories> categories = logic.GetAll();
-            List<CategoriesRequest> categoriesRequest = categories.Select(c => new CategoriesRequest
+            try
             {
-                CategoryID = c.CategoryID,
-                CategoryName = c.CategoryName,
-                Description = c.Description
+                List<Categories> categories = logic.GetAll();
+                List<CategoriesRequest> categoriesRequest = categories.Select(c => new CategoriesRequest
+                {
+                    CategoryID = c.CategoryID,
+                    CategoryName = c.CategoryName,
+                    Description = c.Description
 
-            }).ToList();
+                }).ToList();
 
-            return Ok(categoriesRequest);
+                return Ok(categoriesRequest);
+            }
+            catch (Exception)
+            {
+
+                return InternalServerError();
+            }
+            
         }
 
         public IHttpActionResult Get(int id)
@@ -37,7 +46,7 @@ namespace Practica.MVC.WebAPI.Controllers
                 Categories category = logic.GetOne(id);
 
                 if (category == null) {
-                    return InternalServerError();
+                    return NotFound();
                 }
 
                 CategoriesRequest categoryRequest = new CategoriesRequest
@@ -53,7 +62,7 @@ namespace Practica.MVC.WebAPI.Controllers
             catch (Exception)
             {
 
-                return null;
+                return InternalServerError();
             }
         }
 
