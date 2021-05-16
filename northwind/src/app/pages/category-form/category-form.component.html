@@ -1,0 +1,51 @@
+<h2>{{ actionForm }} Category</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="form-group">
+    <label for="CategoryName" class="form-label">Name</label>
+    <input
+      autofocus
+      formControlName="CategoryName"
+      type="text"
+      class="form-control shadow-none"
+      id="CategoryName"
+      pattern="^[^\s]+(\s+[^\s]+)*$"
+    />
+    <div
+      *ngIf="
+        (categoryName?.invalid &&
+          (categoryName?.dirty || categoryName?.touched)) ||
+        isInvalid
+      "
+    >
+      <small class="text-danger" *ngIf="categoryName?.errors?.required"
+        >Name is required.</small
+      >
+      <small class="text-danger" *ngIf="categoryName?.errors?.maxlength">
+        Name must be up to 15 characters long.
+      </small>
+      <small class="text-danger" *ngIf="categoryName?.errors?.pattern">
+        Name can't start or end with whitespace
+      </small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description" class="form-label">Description</label>
+    <input
+      formControlName="Description"
+      type="text"
+      class="form-control shadow-none"
+      id="description"
+    />
+  </div>
+  <button type="submit" [disabled]="!form.valid" class="btn btn-success">
+    {{ actionForm }}
+  </button>
+  <button
+    type="button"
+    [disabled]="!canReset()"
+    class="btn btn-warning"
+    (click)="reset()"
+  >
+    Reset
+  </button>
+</form>

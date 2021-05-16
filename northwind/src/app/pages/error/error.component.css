@@ -1,0 +1,12 @@
+.error{
+  background-color: #dd0531;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  height: 70vh;
+  justify-content: center;
+}
+p{
+  color:rgba(128, 128, 128, 0.5);
+  font-style: italic;
+}
