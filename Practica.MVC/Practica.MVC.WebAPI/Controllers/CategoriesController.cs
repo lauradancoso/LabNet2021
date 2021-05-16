@@ -102,7 +102,7 @@ namespace Practica.MVC.WebAPI.Controllers
                 logic.Delete(id);
                 return Ok();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return InternalServerError();
             }
