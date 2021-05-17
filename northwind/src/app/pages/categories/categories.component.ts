@@ -4,6 +4,7 @@ import {Router} from "@angular/router"
 import {Categories} from '../../models/categories';
 import {CategoriesService} from '../../services/categories.service'
 
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-categories',
@@ -11,6 +12,11 @@ import {CategoriesService} from '../../services/categories.service'
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+
+  color = "warn";
+  mode = "indeterminate"
+
+  loading:boolean = true;
 
   categories!:Categories[];
 
@@ -22,6 +28,7 @@ export class CategoriesComponent implements OnInit {
     this.setCategorySelected({CategoryID:0, CategoryName:'',Description:''})
     this.getCategories()
   }
+  
   setFormAction(formAction:string, category:Categories){
     this.categoriesService.setFormAction(formAction);
     this.setCategorySelected(category);
@@ -30,13 +37,17 @@ export class CategoriesComponent implements OnInit {
   setCategorySelected(category:Categories){
     this.categoriesService.setCategorySelected(category)
   }
+  
   getCategories(){
-    this.categoriesService.getCategories().subscribe(data=>this.categories = data);
+    this.categoriesService.getCategories().subscribe(data=>{
+      this.categories = data
+      this.loading=false;
+    });
   }
   deleteCategory(id:number){
     this.categoriesService.deleteCategory(id).subscribe(r=>
       this.getCategories()
     );
-    
   }
+  
 }

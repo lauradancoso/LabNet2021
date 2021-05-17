@@ -1,5 +1,13 @@
 <h2>Categories</h2>
+<mat-progress-spinner
+  *ngIf="loading"
+  [color]="color"
+  [mode]="mode"
+  [diameter]="40"
+>
+</mat-progress-spinner>
 <button
+  *ngIf="!loading"
   mat-raised-button
   (click)="
     setFormAction('Add', { CategoryID: 0, CategoryName: '', Description: '' })
@@ -7,7 +15,7 @@
 >
   Add Category
 </button>
-<table class="table table-hover">
+<table *ngIf="!loading" class="table table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>

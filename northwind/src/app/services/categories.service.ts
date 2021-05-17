@@ -11,6 +11,11 @@ import { FormGroup } from '@angular/forms';
 })
 export class CategoriesService {
 
+  //formAction y categorySelected y sus respectivos setters los uso para
+  //la comunicación entre componentes
+  //debería poner estas dos funciones en un servicio distinto destinado solo para eso?
+  //o así está bien??
+  
   private formAction =new BehaviorSubject<string>('');
   formAction$= this.formAction.asObservable();
 
@@ -37,12 +42,14 @@ export class CategoriesService {
     return throwError(
       'Something bad happened; please try again later.');
   }
+
   setFormAction(formAction:string){
     this.formAction.next(formAction);
   }
   setCategorySelected(category:Categories){
     this.categorySelected.next(category);
   }
+
   getCategories():Observable<Categories[]>{
     return this.http.get<Categories[]>(environment.categories + '/categories').pipe(
       catchError(this.handleError)

@@ -1,10 +1,11 @@
 import { Component, OnInit,OnDestroy} from '@angular/core';
 import {Router} from "@angular/router"
-import { FormBuilder,FormGroup,FormControl, Validators, MinLengthValidator } from '@angular/forms';
+import { FormBuilder,FormGroup,FormControl, Validators } from '@angular/forms';
 import { Categories } from 'src/app/models/categories';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 import Swal from 'sweetalert2'
+
 @Component({
   selector: 'app-category-form',
   templateUrl: './category-form.component.html',
