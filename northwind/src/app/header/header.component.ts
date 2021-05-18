@@ -3,7 +3,8 @@ import {Router} from "@angular/router"
 
 
 import {Categories} from '../models/categories';
-import {CategoriesService} from '../services/categories.service'
+import {CategoriesService} from '../services/categories.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +13,12 @@ import {CategoriesService} from '../services/categories.service'
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private categoriesService:CategoriesService,private router: Router){ }
+  dark:boolean;
+
+  constructor(private categoriesService:CategoriesService,private router: Router,private themeService:ThemeService){ }
 
   ngOnInit(): void {
+    this.themeService.darkTheme$.subscribe(data=>this.dark = data)
   }
   setFormAction(formAction:string, category:Categories){
     this.categoriesService.setFormAction(formAction);
@@ -22,6 +26,9 @@ export class HeaderComponent implements OnInit {
   }
   setCategorySelected(category:Categories){
     this.categoriesService.setCategorySelected(category)
+  }
+  changeTheme(){
+    this.themeService.setTheme(!this.dark);
   }
 
 }

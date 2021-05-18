@@ -1,5 +1,6 @@
 <h2>{{ actionForm }} Category</h2>
 <form
+  [class.form-dark]="dark"
   [formGroup]="form"
   (ngSubmit)="onSubmit()"
   autocomplete="off"
@@ -8,6 +9,7 @@
   <div class="form-group mb-3">
     <label for="CategoryName" class="form-label">Name</label>
     <input
+      [class.dark-theme]="dark"
       autofocus
       formControlName="CategoryName"
       type="text"
@@ -36,6 +38,7 @@
   <div class="form-group mb-3">
     <label for="description" class="form-label">Description</label>
     <input
+      [class.dark-theme]="dark"
       formControlName="Description"
       type="text"
       class="form-control shadow-none"

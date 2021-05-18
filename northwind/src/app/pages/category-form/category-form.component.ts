@@ -1,8 +1,11 @@
 import { Component, OnInit,OnDestroy} from '@angular/core';
 import {Router} from "@angular/router"
 import { FormBuilder,FormGroup,FormControl, Validators } from '@angular/forms';
+
 import { Categories } from 'src/app/models/categories';
+
 import { CategoriesService } from 'src/app/services/categories.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 import Swal from 'sweetalert2'
 
@@ -12,15 +15,16 @@ import Swal from 'sweetalert2'
   styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent implements OnInit {
-
+  dark:boolean;
   actionForm!:string;
   form!:FormGroup;
   isInvalid:boolean =false;
   categorySelected!: Categories;
   
-  constructor(private readonly fb:FormBuilder, private categoriesService:CategoriesService,private router: Router) {}
+  constructor(private readonly fb:FormBuilder, private categoriesService:CategoriesService,private router: Router, private themeService:ThemeService) {}
 
   ngOnInit(): void {
+    this.themeService.darkTheme$.subscribe(data=>this.dark = data)
     this.getFormAction();
     this.getCategorySelected();
     this.configForm();

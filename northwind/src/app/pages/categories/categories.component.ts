@@ -2,7 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router"
 
 import {Categories} from '../../models/categories';
-import {CategoriesService} from '../../services/categories.service'
+import {CategoriesService} from '../../services/categories.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 import Swal from 'sweetalert2'
 
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2'
 })
 export class CategoriesComponent implements OnInit {
 
+  dark:boolean;
   color = "warn";
   mode = "indeterminate"
 
@@ -20,11 +22,12 @@ export class CategoriesComponent implements OnInit {
 
   categories!:Categories[];
 
-  constructor(private categoriesService:CategoriesService,private router: Router) { 
+  constructor(private categoriesService:CategoriesService,private router: Router,private themeService:ThemeService) { 
     
   }
 
   ngOnInit(): void {
+    this.themeService.darkTheme$.subscribe(data=>this.dark = data)
     this.setCategorySelected({CategoryID:0, CategoryName:'',Description:''})
     this.getCategories()
   }

@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { HeaderComponent } from './header/header.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
@@ -32,6 +32,7 @@ import { ErrorComponent } from './pages/error/error.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSlideToggleModule,
     MatIconModule,
     ReactiveFormsModule,
     HttpClientModule,
