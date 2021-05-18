@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router"
 import { FormBuilder,FormGroup,FormControl, Validators } from '@angular/forms';
 
@@ -80,29 +80,49 @@ export class CategoryFormComponent implements OnInit {
   }
   addEditCategory(category:Categories){
     if(this.actionForm == "Add"){
-      console.log("add",category)
       this.categoriesService.postCategory(category).subscribe(r=>{
-        this.router.navigate(['/categories']);
-        this.showSuccessAlert();
+        
+        this.showSuccessAlert("add");
       });
     }
     if(this.actionForm == "Edit"){
-      console.log("edit",category)
       this.categoriesService.editCategory({CategoryID:this.categorySelected.CategoryID, CategoryName: category.CategoryName, Description: category.Description}).subscribe(
         r=>{
           this.router.navigate(['/categories']);
-          this.showSuccessAlert();
+          this.showSuccessAlert("edit");
         }
       );
     }
   }
-  showSuccessAlert(){
+  showSuccessAlert(action){
+    if(action == "edit"){
     Swal.fire({
       icon: 'success',
       title: 'The category has been saved',
       showConfirmButton: false,
       timer: 1500
+    });
+    this.router.navigate(['/categories']);
+   }else{
+    Swal.fire({
+      title: 'The category has been saved',
+      text: "What do you want to do?",
+      icon: 'success',
+      showDenyButton: true,
+      confirmButtonColor: '#3085d6',
+      denyButtonColor: '#d33',
+      confirmButtonText: 'Back to category list',
+      denyButtonText: 'Keep adding categories'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/categories']);
+      }
+      if(result.isDenied){
+        this.form.reset();
+        document.getElementById('CategoryName').focus();
+      }
     })
+   }
   }
 
 }

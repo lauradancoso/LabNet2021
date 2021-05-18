@@ -1,0 +1,63 @@
+<div class="d-flex flex-column align-items-center justify-content-center">
+  <h2>{{ actionForm }} Category</h2>
+  <form
+    [class.form-dark]="dark"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    autocomplete="off"
+    class="shadow p-3 mb-5 bg-body rounded"
+  >
+    <div class="form-group mb-3">
+      <label for="CategoryName" class="form-label">Name</label>
+      <input
+        [class.dark-theme]="dark"
+        autofocus
+        formControlName="CategoryName"
+        type="text"
+        class="form-control shadow-none"
+        id="CategoryName"
+        pattern="^[^\s]+(\s+[^\s]+)*$"
+      />
+      <div
+        *ngIf="
+          (categoryName?.invalid &&
+            (categoryName?.dirty || categoryName?.touched)) ||
+          isInvalid
+        "
+      >
+        <small class="text-danger" *ngIf="categoryName?.errors?.required"
+          >Name is required.</small
+        >
+        <small class="text-danger" *ngIf="categoryName?.errors?.maxlength">
+          Name must be up to 15 characters long.
+        </small>
+        <small class="text-danger" *ngIf="categoryName?.errors?.pattern">
+          Name can't start or end with whitespace
+        </small>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input
+        [class.dark-theme]="dark"
+        formControlName="Description"
+        type="text"
+        class="form-control shadow-none"
+        id="description"
+      />
+    </div>
+    <div class="d-flex mt-4">
+      <button type="submit" [disabled]="!form.valid" class="btn btn-success">
+        {{ actionForm }}
+      </button>
+      <button
+        type="button"
+        [disabled]="!canReset()"
+        class="btn btn-warning"
+        (click)="reset()"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -13,10 +13,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { HeaderComponent } from './header/header.component';
-import { CategoriesComponent } from './pages/categories/categories.component';
-import { CategoryFormComponent } from './pages/category-form/category-form.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ErrorComponent } from './pages/error/error.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
+import { HomeComponent } from './home/home.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [

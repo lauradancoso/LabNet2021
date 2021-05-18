@@ -34,7 +34,7 @@
     <tr *ngFor="let cat of categories">
       <th scope="row">{{ cat.CategoryID }}</th>
       <td>{{ cat.CategoryName }}</td>
-      <td>{{ cat.Description }}</td>
+      <td>{{ cat.Description || "No description" }}</td>
       <td class="d-flex justify-content-end">
         <button
           mat-mini-fab

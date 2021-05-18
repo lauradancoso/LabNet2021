@@ -4,17 +4,13 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Categories } from '../models/categories';
 import { environment } from 'src/environments/environment';
-import { FormGroup } from '@angular/forms';
+
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'  
 })
 export class CategoriesService {
-
-  //formAction y categorySelected y sus respectivos setters los uso para
-  //la comunicación entre componentes
-  //debería poner estas dos funciones en un servicio distinto destinado solo para eso?
-  //o así está bien??
   
   private formAction =new BehaviorSubject<string>('');
   formAction$= this.formAction.asObservable();
@@ -28,15 +24,12 @@ export class CategoriesService {
 
   //TODO: revisar esto
   private handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+    if (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      })
     }
     // Return an observable with a user-facing error message.
     return throwError(

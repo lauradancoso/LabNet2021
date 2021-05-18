@@ -8,3 +8,6 @@
 .d-flex > button{
   margin-right: 10px;
 }
+form{
+  width: 50%;
+}
