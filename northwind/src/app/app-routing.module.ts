@@ -7,9 +7,9 @@ import { ErrorComponent } from './pages/error/error.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
+  {path:'', component:HomeComponent},
   {path:'categories',component:CategoriesComponent},
   {path:'addOrEdit', component:CategoryFormComponent},
-  {path:'', redirectTo:'/home',pathMatch:'full'},
   {path:'**', component: ErrorComponent}
 ];
 

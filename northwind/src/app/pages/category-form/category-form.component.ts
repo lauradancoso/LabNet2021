@@ -24,6 +24,7 @@ export class CategoryFormComponent implements OnInit {
     this.getFormAction();
     this.getCategorySelected();
     this.configForm();
+    document.getElementById('CategoryName').focus();
   }
 
   getFormAction(){
@@ -68,6 +69,7 @@ export class CategoryFormComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.form.reset()
+        document.getElementById('CategoryName').focus();
       }
     });
     
