@@ -18,10 +18,12 @@ export class CategoryFormComponent implements OnInit {
   isInvalid:boolean =false;
   categorySelected!: Categories;
   
-  constructor(private readonly fb:FormBuilder, private categoriesService:CategoriesService,private router: Router) {
+  constructor(private readonly fb:FormBuilder, private categoriesService:CategoriesService,private router: Router) {}
+
+  ngOnInit(): void {
     this.getFormAction();
     this.getCategorySelected();
-    
+    this.configForm();
   }
 
   getFormAction(){
@@ -31,9 +33,6 @@ export class CategoryFormComponent implements OnInit {
     this.categoriesService.categorySelected$.subscribe(category =>this.categorySelected=category)
   }
 
-  ngOnInit(): void {
-    this.configForm();
-  }
   configForm(){
     this.form = this.fb.group({
       CategoryName: new FormControl(this.categorySelected.CategoryName,[Validators.required,Validators.maxLength(15)])!,
@@ -76,15 +75,28 @@ export class CategoryFormComponent implements OnInit {
   addEditCategory(category:Categories){
     if(this.actionForm == "Add"){
       console.log("add",category)
-      this.categoriesService.postCategory(category).subscribe(r=>this.router.navigate(['/categories']));
-
+      this.categoriesService.postCategory(category).subscribe(r=>{
+        this.router.navigate(['/categories']);
+        this.showSuccessAlert();
+      });
     }
     if(this.actionForm == "Edit"){
       console.log("edit",category)
       this.categoriesService.editCategory({CategoryID:this.categorySelected.CategoryID, CategoryName: category.CategoryName, Description: category.Description}).subscribe(
-        r=>this.router.navigate(['/categories'])
+        r=>{
+          this.router.navigate(['/categories']);
+          this.showSuccessAlert();
+        }
       );
     }
+  }
+  showSuccessAlert(){
+    Swal.fire({
+      icon: 'success',
+      title: 'The category has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }

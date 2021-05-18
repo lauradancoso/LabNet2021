@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { HeaderComponent } from './header/header.component';
@@ -29,8 +29,10 @@ import { ErrorComponent } from './pages/error/error.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatIconModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule
