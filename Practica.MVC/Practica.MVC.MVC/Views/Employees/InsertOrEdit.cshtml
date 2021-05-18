@@ -1,0 +1,84 @@
+﻿@model Practica.MVC.MVC.Models.EmployeesView
+@{
+    bool add;
+    if (Model == null)
+    {
+        add = true;
+    }
+    else
+    {
+        add = (Model.EmployeeID == 0) ? true : false;
+    }
+    string butttonName = (add) ? "Add" : "Edit";
+    ViewBag.Title = butttonName + " Employee";
+}
+<h2 class="mt-3">@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("InsertOrEdit", "Employees", FormMethod.Post))
+        {
+            @Html.HiddenFor(e => e.EmployeeID);
+            <div class="form-group">
+                @Html.LabelFor(e => e.FirstName)
+                @Html.TextBoxFor(e => e.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.FirstName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.LastName)
+                @Html.TextBoxFor(e => e.LastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.LastName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.Title)
+                @Html.TextBoxFor(e => e.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.Title, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group @add.ToString()">
+                @Html.LabelFor(e => e.BirthDate)
+                @Html.TextBoxFor(e => e.BirthDate, "{0:dd/MM/yy}", new { @class = "form-control default-date-picker" })
+                @Html.ValidationMessageFor(e => e.BirthDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group @add.ToString()">
+                @Html.LabelFor(e => e.HireDate)
+                @Html.TextBoxFor(e => e.HireDate, "{0:dd/MM/yy}", new { @class = "form-control default-date-picker" })
+                @Html.ValidationMessageFor(e => e.HireDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.Address)
+                @Html.TextBoxFor(e => e.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.Address, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.City)
+                @Html.TextBoxFor(e => e.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.City, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.PostalCode)
+                @Html.TextBoxFor(e => e.PostalCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.PostalCode, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.Country)
+                @Html.TextBoxFor(e => e.Country, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.Country, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.HomePhone)
+                @Html.TextBoxFor(e => e.HomePhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(e => e.HomePhone, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value=@butttonName class="btn btn-success" />
+        }
+    </div>
+</div>
+
+<script>
+    (() => {
+        $(document).ready(function () {
+            $('#HireDate').datepicker({ dateFormat: 'dd/mm/y', maxDate: 0, changeMonth: true, changeYear: true, minDate: '-100Y', yearRange: '-100:+0' });
+            $('#BirthDate').datepicker({ dateFormat: 'dd/mm/y', maxDate: 0, changeMonth: true, changeYear: true, minDate: '-100Y', yearRange: '-100:+0' });
+        });
+    })();
+
+</script>

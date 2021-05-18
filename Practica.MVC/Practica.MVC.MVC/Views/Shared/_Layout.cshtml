@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - NW Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/jquery-ui.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top m-0">
+        @Html.ActionLink("Northwind", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" href="~/Categories/">View Categories</a></li>
+                        <li><a class="dropdown-item" href="~/Categories/InsertOrEdit/0">Add Categories</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Employees
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" href="~/Employees/">View Employees</a></li>
+                        <li><a class="dropdown-item" href="~/Employees/InsertOrEdit/0">Add Employees</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">@Html.ActionLink("Random Dogs", "Index", "Dog", new { area = "" }, new { @class = "nav-link" })</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/Scripts/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.min.js")
+    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/sweetalert2.all.min.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
