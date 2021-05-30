@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Practica.MVC.WebAPI.Models
 {
-    public class CategoriesRequest
+    public class CategoriesResponse
     {
         public int CategoryID { get; set; }
 
