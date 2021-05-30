@@ -1,4 +1,5 @@
 ﻿using Practica.MVC.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,23 +9,45 @@ namespace Practica.MVC.Logic
     {
         public void Add(Categories newT)
         {
-            context.Categories.Add(newT);
-            context.SaveChanges();
+            try
+            {
+                context.Categories.Add(newT);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public void Delete(int id)
         {
-            var categorieToDelete = context.Categories.Find(id);
-            categorieToDelete.Products.Clear();
-            context.SaveChanges();
-            context.Categories.Remove(categorieToDelete);
-            context.SaveChanges();
-
+            try
+            {
+                var categorieToDelete = context.Categories.Find(id);
+                categorieToDelete.Products.Clear();
+                context.SaveChanges();
+                context.Categories.Remove(categorieToDelete);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<Categories> GetAll()
         {
-            return context.Categories.ToList();
+            try
+            {
+                return context.Categories.ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         public Categories GetOne(int id)
         {
@@ -33,13 +56,21 @@ namespace Practica.MVC.Logic
 
         public void Update(Categories updatedT)
         {
-            var categorieToUpdate = context.Categories.Find(updatedT.CategoryID);
+            try
+            {
+                var categorieToUpdate = context.Categories.Find(updatedT.CategoryID);
 
-            categorieToUpdate.CategoryName = updatedT.CategoryName;
-            categorieToUpdate.Description = updatedT.Description;
-            categorieToUpdate.Picture = updatedT.Picture;
+                categorieToUpdate.CategoryName = updatedT.CategoryName;
+                categorieToUpdate.Description = updatedT.Description;
+                categorieToUpdate.Picture = updatedT.Picture;
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
 
         }
     }
