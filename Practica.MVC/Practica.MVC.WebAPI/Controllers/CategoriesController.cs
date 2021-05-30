@@ -4,10 +4,7 @@ using Practica.MVC.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace Practica.MVC.WebAPI.Controllers
 {
@@ -20,7 +17,7 @@ namespace Practica.MVC.WebAPI.Controllers
             try
             {
                 List<Categories> categories = logic.GetAll();
-                List<CategoriesRequest> categoriesRequest = categories.Select(c => new CategoriesRequest
+                List<CategoriesResponse> categoriesRequest = categories.Select(c => new CategoriesResponse
                 {
                     CategoryID = c.CategoryID,
                     CategoryName = c.CategoryName,
@@ -32,7 +29,6 @@ namespace Practica.MVC.WebAPI.Controllers
             }
             catch (Exception)
             {
-
                 return InternalServerError();
             }
             
@@ -49,7 +45,7 @@ namespace Practica.MVC.WebAPI.Controllers
                     return NotFound();
                 }
 
-                CategoriesRequest categoryRequest = new CategoriesRequest
+                CategoriesResponse categoryRequest = new CategoriesResponse
                 {
                     CategoryID = category.CategoryID,
                     CategoryName = category.CategoryName,
@@ -61,13 +57,12 @@ namespace Practica.MVC.WebAPI.Controllers
             }
             catch (Exception)
             {
-
                 return InternalServerError();
             }
         }
 
         [HttpPost]
-        public IHttpActionResult Post([FromBody] CategoriesRequest categoryRequest)
+        public IHttpActionResult Post([FromBody] CategoriesResponse categoryRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -107,7 +102,7 @@ namespace Practica.MVC.WebAPI.Controllers
         }
 
         [HttpPatch]
-        public IHttpActionResult Edit([FromBody] CategoriesRequest categoryRequest)
+        public IHttpActionResult Edit([FromBody] CategoriesResponse categoryRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -128,7 +123,6 @@ namespace Practica.MVC.WebAPI.Controllers
             }
             catch (Exception)
             {
-
                 return InternalServerError();
             }
         }
