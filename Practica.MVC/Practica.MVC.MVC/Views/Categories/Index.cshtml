@@ -72,7 +72,15 @@
                             showCloseButton: true,
                         }).then(() => window.location.href = "/Categories");
                         
-                    }
+                    },
+                    error: function (data) {
+                        Swal.fire({
+                            title: (data.status == 404) ? "ID is not valid" :"error",
+                            icon: "error",
+                            showCloseButton: true,
+                        }).then(() => window.location.href = "/Categories");
+
+                    },
                 });
             }
         });

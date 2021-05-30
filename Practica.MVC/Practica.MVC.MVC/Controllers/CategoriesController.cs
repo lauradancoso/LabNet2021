@@ -4,6 +4,7 @@ using Practica.MVC.MVC.Models;
 using Practica.MVC.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Practica.MVC.MVC.Controllers
 {
@@ -13,17 +14,23 @@ namespace Practica.MVC.MVC.Controllers
 
         public ActionResult Index()
         {
-
-            List<Categories> categories = logic.GetAll();
-            List<CategoriesView> categoriesViews = categories.Select(c => new CategoriesView
+            try
             {
-                CategoryID = c.CategoryID,
-                CategoryName = c.CategoryName,
-                Description = c.Description
+                List<Categories> categories = logic.GetAll();
+                List<CategoriesView> categoriesViews = categories.Select(c => new CategoriesView
+                {
+                    CategoryID = c.CategoryID,
+                    CategoryName = c.CategoryName,
+                    Description = c.Description
 
-            }).ToList();
-            
-            return View(categoriesViews);
+                }).ToList();
+
+                return View(categoriesViews);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Error");
+            }         
         }
 
         public ActionResult InsertOrEdit(int id)
@@ -45,9 +52,9 @@ namespace Practica.MVC.MVC.Controllers
                     };
                     return View(categoryView);
                 }
-                catch (System.Exception)
+                catch (Exception ex)
                 {
-                    return RedirectToAction("Index", "Error");
+                    return this.RedirectToAction("Index","Error", new {msg = ex.Message});
                 }
             }
         }
@@ -78,10 +85,9 @@ namespace Practica.MVC.MVC.Controllers
                 
                 return RedirectToAction("Index");
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-
-                return RedirectToAction("Index","Error");
+                return this.RedirectToAction("Index", "Error", new { msg = ex.Message });
             }
 
         }
@@ -93,10 +99,13 @@ namespace Practica.MVC.MVC.Controllers
                 logic.Delete(id);
                 return RedirectToAction("Index");
             }
-            catch (System.Exception)
+            catch (NullReferenceException)
             {
-
-                return RedirectToAction("Index", "Error");
+                return new HttpNotFoundResult();
+            }
+            catch (Exception ex)
+            {
+                return this.RedirectToAction("Index", "Error", new { msg = ex.Message });
             }
         }
     }
